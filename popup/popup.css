@@ -1,0 +1,120 @@
+/* NovaVPN Dark Cyber Theme - Extended popup.css */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0D1B2A; /* Midnight Blue */
+  color: #ffffff;
+  margin: 0;
+  padding: 15px;
+  width: 270px;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+header .logo-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+}
+
+h2 {
+  font-size: 18px;
+  color: #14FFEC;
+  margin: 0;
+}
+
+select, button {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  margin-top: 8px;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+select {
+  background-color: #1B263B;
+  color: #ffffff;
+  border: 1px solid #14FFEC;
+}
+
+button {
+  background-color: #14FFEC;
+  color: #0D1B2A;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #0EF1DC;
+}
+
+.status-icon {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #9BA3AF;
+  margin: 0 auto 5px;
+}
+
+#status {
+  text-align: center;
+  font-weight: bold;
+  color: #9BA3AF;
+  margin: 6px 0 10px;
+}
+
+.connection-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+}
+
+.connection-info li {
+  margin-bottom: 6px;
+}
+
+.security-options {
+  margin-top: 10px;
+}
+
+.security-options h3, .connection-info h3 {
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #14FFEC;
+}
+
+footer {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 20px;
+  color: #9BA3AF;
+}
+
+.footer-links {
+  margin-bottom: 4px;
+}
+
+.footer-links a {
+  color: #14FFEC;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}

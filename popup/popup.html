@@ -1,0 +1,63 @@
+<!-- NovaVPN Extension Full UI Layout (Enhanced popup.html) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="popup.css">
+  <title>NovaVPN</title>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo-row">
+        <img src="../assets/icons/icon48.png" alt="NovaVPN Logo" class="logo">
+        <h2>NovaVPN</h2>
+      </div>
+    </header>
+
+    <main>
+      <section class="connection-panel">
+        <div class="status-icon" id="statusIcon"></div>
+        <p id="status">Disconnected</p>
+        <button id="toggleBtn">Connect</button>
+      </section>
+
+      <section class="server-selection">
+        <label for="serverSelect">Choose a Server</label>
+        <select id="serverSelect">
+          <option value="">Loading servers...</option>
+        </select>
+      </section>
+
+      <section class="connection-info">
+        <h3>Connection Details</h3>
+        <ul>
+          <li><strong>IP Address:</strong> <span id="ipAddress">N/A</span></li>
+          <li><strong>Server Location:</strong> <span id="serverLocation">N/A</span></li>
+          <li><strong>Connection Duration:</strong> <span id="connectionTime">00:00</span></li>
+        </ul>
+      </section>
+
+      <section class="security-options">
+        <h3>Security</h3>
+        <label>
+          <input type="checkbox" id="killswitchToggle">
+          Enable Kill Switch
+        </label>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-links">
+        <a href="#" target="_blank">Privacy Policy</a>
+        <span>|</span>
+        <span>Version 1.0</span>
+      </div>
+      <small>&copy; 2025 NovaVPN. All rights reserved.</small>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
