@@ -1,7 +1,0 @@
-# .gitignore
-.DS_Store
-*.log
-*.zip
-*.pem
-*.crt
-*.key
