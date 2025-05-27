@@ -30,10 +30,8 @@
           <button type="submit" class="login-btn">Sign In</button>
       </form>
 
-      <!-- Google Sign-In Button -->
-      <div class="google-signin-container" style="margin-top: 20px; display: flex; justify-content: center;">
-        <div class="g-signin2" data-onsuccess="onGoogleSignIn"></div>
-      </div>
+      <!-- Modern Google Sign-In Button -->
+      <div id="googleSignInDiv" style="margin-top: 20px; display: flex; justify-content: center;"></div>
       
       <div class="signup-link">
           Don't have an account? <a href="#" id="signupLink">Sign Up</a>
@@ -184,6 +182,32 @@
   </div>
 
   <script src="js/popup.js"></script>
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  
+  <!-- Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <script>
+    function handleCredentialResponse(response) {
+      console.log("Encoded JWT ID token: " + response.credential);
+      // TODO: Send this token to your backend for verification and user login/signup
+
+      alert("Google sign-in successful!");
+    }
+
+    window.onload = function () {
+      google.accounts.id.initialize({
+        client_id: '1097594063034-s24vbe6ufen2pugu5o8d00for6tl3dus.apps.googleusercontent.com',
+        callback: handleCredentialResponse,
+      });
+
+      google.accounts.id.renderButton(
+        document.getElementById("googleSignInDiv"),
+        { theme: "outline", size: "large", width: 250 }
+      );
+
+      // Optionally, prompt the One Tap dialog
+      // google.accounts.id.prompt();
+    };
+  </script>
 </body>
 </html>
