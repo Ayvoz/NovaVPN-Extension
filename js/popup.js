@@ -12,8 +12,73 @@ function showScreen(screenName) {
     screens[screenName].style.display = screenName === 'main' ? 'block' : 'flex';
 }
 
+// Server dropdown toggle elements
+const serverSelector = document.getElementById('serverSelector');
+const serverList = document.getElementById('serverList');
+
+serverSelector.addEventListener('click', () => {
+  serverList.classList.toggle('show');
+});
+
+// Close dropdown if clicking outside
+document.addEventListener('click', (event) => {
+  if (!serverSelector.contains(event.target) && !serverList.contains(event.target)) {
+    serverList.classList.remove('show');
+  }
+});
+
+// Initialize Google Auth client on popup load
+function initGoogleAuth() {
+    gapi.load('auth2', () => {
+        gapi.auth2.init({
+            client_id: '1097594063034-s24vbe6ufen2pugu5o8d00for6tl3dus.apps.googleusercontent.com'
+        });
+    });
+}
+
+// Google Sign-In callback function
+function onGoogleSignIn(googleUser) {
+    const id_token = googleUser.getAuthResponse().id_token;
+    const profile = googleUser.getBasicProfile();
+
+    fetch('https://your-backend.com/google-signin', {  // Replace with your backend endpoint
+        method: 'POST',
+        body: JSON.stringify({ id_token }),
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.token) {
+            chrome.storage.local.set({ authToken: data.token, userEmail: profile.getEmail() });
+            showScreen('main');
+            loadUserData();
+            loadServerList();
+        } else {
+            alert('Google Sign-in failed on backend.');
+            signOutGoogle();
+        }
+    })
+    .catch(error => {
+        console.error('Google Sign-in error:', error);
+        alert('Google Sign-in failed. Please try again.');
+        signOutGoogle();
+    });
+}
+
+// Function to sign out from Google if needed
+function signOutGoogle() {
+    const auth2 = gapi.auth2.getAuthInstance();
+    if (auth2) {
+        auth2.signOut().then(() => {
+            console.log('Google user signed out.');
+        });
+    }
+}
+
 // Initialize - Check if user is logged in
 document.addEventListener('DOMContentLoaded', async () => {
+    initGoogleAuth();
+
     const isLoggedIn = await checkAuthStatus();
     if (isLoggedIn) {
         showScreen('main');
@@ -45,12 +110,10 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         const response = await mockLogin(email, password);
         
         if (response.success) {
-            // Save auth token
             chrome.storage.local.set({ 
                 authToken: response.token,
                 userEmail: email 
             });
-            
             showScreen('main');
             loadUserData();
             loadServerList();
@@ -109,18 +172,12 @@ document.getElementById('backBtn').addEventListener('click', () => {
 
 // Logout Handler
 document.getElementById('logoutBtn').addEventListener('click', async () => {
-    // Disconnect if connected
     if (connectionState.isConnected) {
         await disconnect();
     }
-    
-    // Clear storage
     chrome.storage.local.clear();
-    
-    // Send message to background script
     chrome.runtime.sendMessage({ action: 'logout' });
-    
-    // Show login screen
+    signOutGoogle();
     showScreen('login');
 });
 
@@ -151,12 +208,10 @@ async function connect() {
         return;
     }
     
-    // Show loading state
     connectBtn.disabled = true;
     connectIcon.textContent = '...';
     
     try {
-        // Send connect message to background script
         const response = await chrome.runtime.sendMessage({
             action: 'connect',
             server: connectionState.selectedServer
@@ -216,35 +271,38 @@ const servers = [
 ];
 
 function loadServerList() {
-  const serverList = document.getElementById('serverList');
   serverList.innerHTML = '';
 
   servers.forEach(server => {
-    // Create server item container
     const serverItem = document.createElement('div');
     serverItem.className = 'server-item';
     serverItem.dataset.serverId = server.id;
 
-    // Server flag and name
+    if (connectionState.selectedServer === server.id) {
+      serverItem.classList.add('selected');
+    }
+
     serverItem.innerHTML = `
       <span class="server-flag">${server.flag}</span>
       <span class="server-name">${server.name}</span>
       <span class="server-latency">${server.latency} ms</span>
-      <button class="connect-btn">Connect</button>
+      <button class="connect-btn" ${connectionState.isConnected && connectionState.selectedServer === server.id ? '' : ''}>
+        Connect
+      </button>
     `;
 
-    // Append to the list
     serverList.appendChild(serverItem);
 
-    // Connect button handler
     const connectBtn = serverItem.querySelector('.connect-btn');
     connectBtn.addEventListener('click', () => {
-      if (connectionState.selectedServer === server.id) {
+      if (connectionState.selectedServer === server.id && connectionState.isConnected) {
         alert('You are already connected to this server.');
         return;
       }
       connectionState.selectedServer = server.id;
+      serverList.classList.remove('show');  // Close dropdown on selection
       connect();
+      loadServerList();  // Refresh to update styles
     });
   });
 }
