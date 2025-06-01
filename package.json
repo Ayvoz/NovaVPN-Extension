@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "firebase": "^11.8.1"
+    "firebase": "^11.8.1",
+    "svg-country-flags": "^1.2.10"
   }
 }

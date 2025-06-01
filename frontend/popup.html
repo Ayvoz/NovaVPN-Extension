@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VPN Extension</title>
+    <link rel="stylesheet" href="css/popup.css" />
+    <script defer type="module" src="js/popup.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- MAIN PANEL -->
+<div class="main-panel">
+
+    <!-- VPN SCREEN -->
+    <div id="vpn-screen" class="screen">
+
+        <!-- VPN Card -->
+        <div class="vpn-card">
+
+<!-- Top Bar -->
+<div class="vpn-top-bar">
+    <div class="dropdown">
+        <!-- INLINE SVG for category (menu) -->
+        <svg class="icon-button-svg" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 6H20V8H4V6ZM4 11H20V13H4V11ZM4 16H20V18H4V16Z" />
+        </svg>
+
+        <div class="dropdown-content" id="menu-dropdown">
+            <button id="nav-speed" class="dropdown-item">Speed Test</button>
+            <button id="nav-servers" class="dropdown-item">Servers</button>
+        </div>
+    </div>
+
+    <span class="vpn-title">VPN</span>
+
+<!-- INLINE SVG for modern settings -->
+<svg class="icon-button-svg" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 15.5C13.93 15.5 15.5 13.93 15.5 12C15.5 10.07 13.93 8.5 12 8.5C10.07 8.5 8.5 10.07 8.5 12C8.5 13.93 10.07 15.5 12 15.5ZM19.43 12.98C19.47 12.66 19.5 12.33 19.5 12C19.5 11.67 19.47 11.34 19.43 11.02L21.54 9.37C21.71 9.24 21.77 9 21.68 8.79L19.95 5.21C19.86 5 19.64 4.91 19.43 5L16.9 5.79C16.36 5.41 15.77 5.11 15.14 4.91L14.5 2.21C14.45 2 14.27 1.85 14.05 1.85H9.95C9.73 1.85 9.55 2 9.5 2.21L8.86 4.91C8.23 5.11 7.64 5.41 7.1 5.79L4.57 5C4.36 4.91 4.14 5 4.05 5.21L2.32 8.79C2.23 9 2.29 9.24 2.46 9.37L4.57 11.02C4.53 11.34 4.5 11.67 4.5 12C4.5 12.33 4.53 12.66 4.57 12.98L2.46 14.63C2.29 14.76 2.23 15 2.32 15.21L4.05 18.79C4.14 19 4.36 19.09 4.57 19L7.1 18.21C7.64 18.59 8.23 18.89 8.86 19.09L9.5 21.79C9.55 22 9.73 22.15 9.95 22.15H14.05C14.27 22.15 14.45 22 14.5 21.79L15.14 19.09C15.77 18.89 16.36 18.59 16.9 18.21L19.43 19C19.64 19.09 19.86 19 19.95 18.79L21.68 15.21C21.77 15 21.71 14.76 21.54 14.63L19.43 12.98ZM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17Z" />
+</svg>
+
+</div>
+
+            <!-- Connecting Time -->
+            <div class="vpn-connecting-text">Connecting Time</div>
+            <div class="vpn-timer" id="vpn-timer">00:00:00</div>
+
+ <!-- Speed Ring -->
+<div class="vpn-speed-ring-wrapper">
+
+    <!-- MULTI-LAYERED SVG -->
+    <svg class="vpn-speed-ring-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- Orange Gradient -->
+        <defs>
+            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffa726" />
+                <stop offset="100%" stop-color="#fb8c00" />
+            </linearGradient>
+        </defs>
+
+        <!-- Layer 1: large transparent orange -->
+        <path fill="rgba(255, 138, 0, 0.25)"
+              d="M44.8,-69.2C58.3,-61.6,68.7,-51,73.7,-38.8C78.7,-26.5,78.2,-13.3,74.8,-1.1C71.4,11.1,65.1,22.3,58.7,34.4C52.2,46.6,45.7,59.7,35.3,65.3C24.9,70.9,10.9,69,-1.6,66.7C-14.1,64.4,-25.1,61.7,-35.3,56.1C-45.6,50.5,-55,42,-62.6,31.7C-70.2,21.3,-76,9.2,-77.6,-3.7C-79.1,-16.6,-76.4,-30.2,-69.6,-41.1C-62.8,-52,-51.9,-60.2,-40,-67.7C-28.1,-75.3,-14.5,-82.1,1.3,-83.7C17.3,-85.3,34.7,-81.6,44.8,-69.2Z"
+              transform="translate(100 100) rotate(0)" />
+
+        <!-- Layer 2: medium orange -->
+        <path fill="url(#grad)"
+              d="M42.3,-66.1C56.2,-58.6,67.4,-48.1,71.6,-36.5C75.8,-24.9,73,-12.5,70.2,-0.5C67.4,11.5,64.6,23,57.8,34.1C51,45.1,41.2,55.7,29.4,62.3C17.5,68.8,3.7,71.3,-10.6,71.1C-25,70.9,-39.9,67.9,-51.7,59.1C-63.5,50.3,-72.2,35.7,-76.3,21C-80.3,6.4,-79.7,-8.2,-75.5,-23.1C-71.3,-38,-63.5,-53.2,-51.7,-60.9C-39.9,-68.7,-25,-69.1,-10.3,-71.6C4.3,-74.1,17.1,-78.7,42.3,-66.1Z"
+              transform="translate(100 100) rotate(15)" />
+
+        <!-- Layer 3: translucent white -->
+        <path fill="rgba(255, 255, 255, 0.4)"
+              d="M40,-65C53.3,-56.7,64.4,-46.7,68.7,-34.9C73,-23.2,70.5,-9.6,67.8,4.7C65.2,19.1,62.3,33.9,54.1,45.2C45.9,56.6,32.5,64.6,18.1,69.3C3.7,74,-12.6,75.3,-27.2,71.4C-41.8,67.5,-54.6,58.5,-63.6,46.5C-72.5,34.5,-77.5,19.5,-76.5,5.2C-75.5,-9.2,-68.6,-23,-59.4,-34.9C-50.3,-46.7,-38.9,-56.5,-26.1,-63.9C-13.3,-71.3,0.8,-76.2,17.3,-74.5C33.9,-72.8,53.3,-65,40,-65Z"
+              transform="translate(100 100) rotate(-10)" />
+
+    </svg>
+
+    <!-- Inner White Circle -->
+    <div class="vpn-speed-ring-center"></div>
+
+    <!-- Speed Value -->
+    <div class="vpn-speed-value" id="vpn-speed-value">56<br /><small>mb/s</small></div>
+
+</div>
+
+            <!-- Stats Row -->
+            <div class="vpn-stats-row">
+                <div class="vpn-stat">
+                    <img src="assets/icons/download.svg" class="stat-icon" />
+                    <div class="stat-value" id="vpn-download-speed">0.0 <small>mb/s</small></div>
+                    <div class="stat-label">Download</div>
+                </div>
+                <div class="vpn-stat">
+                    <img src="assets/icons/upload.svg" class="stat-icon" />
+                    <div class="stat-value" id="vpn-upload-speed">0.0 <small>mb/s</small></div>
+                    <div class="stat-label">Upload</div>
+                </div>
+            </div>
+
+          <!-- White pill background line (under button) -->
+<div class="vpn-button-background-line"></div>
+
+<!-- START BUTTON -->
+<button id="vpn-start-button" class="vpn-start-button">START</button>
+
+        </div> <!-- end vpn-card -->
+
+        <!-- Server Pill -->
+        <div class="vpn-server-pill" id="vpn-server-pill">
+            <img src="assets/flags/country-flags/svg/us.svg" class="vpn-server-flag" />
+            <span class="vpn-server-text">LA, United States</span>
+            <div class="vpn-server-arrow">
+                <img src="assets/icons/arrow-right.svg" />
+            </div>
+        </div>
+
+    </div> <!-- end vpn-screen -->
+
+    <!-- SPEED TEST SCREEN -->
+    <div id="speed-test-screen" class="screen hidden">
+        <div class="vpn-card">
+            <div class="vpn-top-bar">
+                <div class="dropdown">
+                    <img src="assets/icons/category.svg" class="icon-button" />
+                    <div class="dropdown-content">
+                        <button id="nav-vpn" class="dropdown-item">VPN</button>
+                        <button id="nav-servers" class="dropdown-item">Servers</button>
+                    </div>
+                </div>
+                <span class="vpn-title">Speed Test</span>
+                <img src="assets/icons/settings.svg" class="icon-button" />
+            </div>
+
+            <div class="vpn-connecting-text">Speed Test coming soon...</div>
+        </div>
+    </div> <!-- end speed-test-screen -->
+
+    <!-- SERVERS SCREEN -->
+    <div id="server-screen" class="screen hidden">
+        <div class="vpn-card">
+            <div class="vpn-top-bar">
+                <div class="dropdown">
+                    <img src="assets/icons/category.svg" class="icon-button" />
+                    <div class="dropdown-content">
+                        <button id="nav-vpn" class="dropdown-item">VPN</button>
+                        <button id="nav-speed" class="dropdown-item">Speed Test</button>
+                    </div>
+                </div>
+                <span class="vpn-title">Servers</span>
+                <img src="assets/icons/settings.svg" class="icon-button" />
+            </div>
+
+            <div class="vpn-connecting-text">Server List coming soon...</div>
+        </div>
+    </div> <!-- end server-screen -->
+
+</div> <!-- end main-panel -->
+
+</body>
+</html>

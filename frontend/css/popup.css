@@ -1,0 +1,357 @@
+/* ========================= */
+/* 🌟 MAIN PANEL (WHITE BACKGROUND) */
+/* ========================= */
+.main-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: #f7f7f7; /* Light background like reference */
+    min-height: 100vh;
+    width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+/* ========================= */
+/* 🌟 SCREEN */
+/* ========================= */
+.screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ========================= */
+/* 🌟 VPN CARD */
+/* ========================= */
+.vpn-card {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: radial-gradient(circle at center, #143c62 0%, #0c1c2c 100%);
+    border-radius: 50px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.05);
+    padding: 24px 20px 80px 20px; /* FIXED */
+    margin-bottom: 0;
+    overflow: visible; /* ALSO IMPORTANT → so button can float */
+}
+
+
+/* ========================= */
+/* 🌟 TOP BAR */
+/* ========================= */
+.vpn-top-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.vpn-title {
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.icon-button {
+    width: 36px;
+    height: 36px;
+    padding: 6px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.828);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.icon-button-svg {
+    width: 36px;
+    height: 36px;
+    padding: 6px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.icon-button-svg:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+
+/* ========================= */
+/* 🌟 DROPDOWN NAV */
+/* ========================= */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background-color: #1c3f60;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    padding: 8px 0;
+    z-index: 100;
+    min-width: 140px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 10px 16px;
+    color: white;
+    text-align: left;
+    background: none;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* ========================= */
+/* 🌟 CONNECTING TIME */
+/* ========================= */
+.vpn-connecting-text {
+    color: #cfd9e3;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+/* ========================= */
+/* 🌟 TIMER */
+/* ========================= */
+.vpn-timer {
+    color: white;
+    font-weight: 900;
+    font-size: 36px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* ========================= */
+/* 🌟 SPEED RING */
+/* ========================= */
+.vpn-speed-ring-wrapper {
+    position: relative;
+    width: 240px;
+    height: 240px;
+    margin-bottom: 20px;
+    overflow: visible; /* FIXED — show outer layers */
+    border-radius: 50%;
+    box-shadow: 0 0 0 rgba(255, 138, 0, 0.5);
+}
+
+.vpn-speed-ring-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px; /* FIXED — smaller */
+    height: 120px; /* FIXED — smaller */
+    border-radius: 50%;
+    background: white;
+    box-shadow: 
+        0 0 12px rgba(255, 255, 255, 0.5), 
+        0 0 32px rgba(255, 255, 255, 0.4), 
+        0 0 48px rgba(255, 255, 255, 0.3);
+    z-index: 1;
+}
+
+
+.vpn-speed-ring-svg {
+    width: 240px;
+    height: 240px;
+    filter: drop-shadow(0 8px 16px rgba(255, 138, 0, 0.6));
+    animation: pulse 2s infinite;
+    z-index: 2;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 16px 16px rgba(255, 138, 0, 0.6));
+    }
+    50% {
+        transform: scale(1.05);
+        filter: drop-shadow(0 16px 24px rgba(255, 138, 0, 1));
+    }
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 16px 16px rgba(255, 138, 0, 0.6));
+    }
+}
+
+.vpn-speed-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #1c1c1c; /* DARK text like reference */
+    font-size: 36px;
+    font-weight: 900;
+    text-align: center;
+    line-height: 0.5;
+    z-index: 3;
+}
+
+.vpn-speed-value small {
+    font-size: 14px;
+    color: #666666; /* soft gray */
+}
+
+/* ========================= */
+/* 🌟 STATS ROW */
+/* ========================= */
+.vpn-stats-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 28px;
+    padding: 0 12px;
+}
+
+.vpn-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #cfd9e3;
+}
+
+.stat-icon {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 6px;
+    filter: brightness(1000%) invert(100%);
+}
+
+.stat-value {
+    font-size: 18px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 4px;
+}
+
+.stat-value small {
+    font-size: 12px;
+    color: #cfd9e3;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #8fa3b8;
+    font-weight: 500;
+}
+
+/* ========================= */
+/* 🌟 START BUTTON — FLOATING FIXED */
+/* ========================= */
+.vpn-button-background-line {
+    width: 100%;
+    max-width: 176px;
+    height: 75px; /* Thickness of the line */
+    background: #ffffff;
+    border-radius: 50px;
+    margin-top: 2px; /* pull it up under button */
+    margin-bottom: -12px;
+    position: relative;
+    z-index: 1; /* behind button */
+}
+
+
+.vpn-start-button {
+    position: relative; /* RELATIVE — not absolute */
+    top: -57px; /* FLOATING → half navy / half white */
+    padding: 20px 50px;
+    font-size: 18px;
+    font-weight: 900;
+    border: none;
+    border-radius: 50px; /* FULL pill */
+    background: linear-gradient(135deg, #ffa726, #fb8c00);
+    color: white;
+    box-shadow: 0px 28px 28px rgba(255, 152, 0, 0.6);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    z-index: 20;
+    margin-bottom: -170px; /* spacing after button */
+}
+
+/* ========================= */
+/* 🌟 SERVER PILL */
+/* ========================= */
+.vpn-server-pill {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffffff;
+    border-radius: 100px; /* More rounded */
+    padding: 27px 27px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 420px;
+    margin-top: 60px; /* Space below card */
+    margin-bottom: 24px;
+}
+
+.vpn-server-flag {
+    width: 50px;
+    height: 30px;
+    border-radius: 20%;
+    margin-right: 10px;
+}
+
+.vpn-server-text {
+    font-weight: 700;
+    font-size: 14px;
+    color: #333;
+    flex: 1;
+}
+
+.vpn-server-arrow {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffa726, #fb8c00);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.vpn-server-arrow img {
+    width: 12px;
+    height: 12px;
+    filter: brightness(1000%) invert(100%);
+}
