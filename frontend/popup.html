@@ -6,7 +6,8 @@
     <title>VPN Extension</title>
     <link rel="stylesheet" href="css/popup.css" />
     <script defer type="module" src="js/popup.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
 </head>
 <body>
 
@@ -33,14 +34,17 @@
         </div>
     </div>
 
-    <span class="vpn-title">VPN</span>
+    <span class="vpn-title">NovaVPN</span>
 
-<!-- INLINE SVG for modern settings -->
+<!-- INLINE SVG for prettier settings -->
 <svg class="icon-button-svg" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 15.5C13.93 15.5 15.5 13.93 15.5 12C15.5 10.07 13.93 8.5 12 8.5C10.07 8.5 8.5 10.07 8.5 12C8.5 13.93 10.07 15.5 12 15.5ZM19.43 12.98C19.47 12.66 19.5 12.33 19.5 12C19.5 11.67 19.47 11.34 19.43 11.02L21.54 9.37C21.71 9.24 21.77 9 21.68 8.79L19.95 5.21C19.86 5 19.64 4.91 19.43 5L16.9 5.79C16.36 5.41 15.77 5.11 15.14 4.91L14.5 2.21C14.45 2 14.27 1.85 14.05 1.85H9.95C9.73 1.85 9.55 2 9.5 2.21L8.86 4.91C8.23 5.11 7.64 5.41 7.1 5.79L4.57 5C4.36 4.91 4.14 5 4.05 5.21L2.32 8.79C2.23 9 2.29 9.24 2.46 9.37L4.57 11.02C4.53 11.34 4.5 11.67 4.5 12C4.5 12.33 4.53 12.66 4.57 12.98L2.46 14.63C2.29 14.76 2.23 15 2.32 15.21L4.05 18.79C4.14 19 4.36 19.09 4.57 19L7.1 18.21C7.64 18.59 8.23 18.89 8.86 19.09L9.5 21.79C9.55 22 9.73 22.15 9.95 22.15H14.05C14.27 22.15 14.45 22 14.5 21.79L15.14 19.09C15.77 18.89 16.36 18.59 16.9 18.21L19.43 19C19.64 19.09 19.86 19 19.95 18.79L21.68 15.21C21.77 15 21.71 14.76 21.54 14.63L19.43 12.98ZM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17Z" />
+    <path d="M19.14 12.936c.036-.3.06-.606.06-.936 0-.33-.024-.636-.06-.936l2.03-1.584a.5.5 0 00.12-.648l-1.924-3.33a.5.5 0 00-.605-.21l-2.39.96a7.978 7.978 0 00-1.62-.936l-.36-2.52A.5.5 0 0014.5 3h-5a.5.5 0 00-.495.42l-.36 2.52c-.588.24-1.14.54-1.62.936l-2.39-.96a.5.5 0 00-.605.21l-1.924 3.33a.5.5 0 00.12.648l2.03 1.584c-.036.3-.06.606-.06.936 0 .33.024.636.06.936l-2.03 1.584a.5.5 0 00-.12.648l1.924 3.33a.5.5 0 00.605.21l2.39-.96c.48.396 1.032.696 1.62.936l.36 2.52A.5.5 0 009.5 21h5a.5.5 0 00.495-.42l.36-2.52c.588-.24 1.14-.54 1.62-.936l2.39.96a.5.5 0 00.605-.21l1.924-3.33a.5.5 0 00-.12-.648l-2.03-1.584zM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17Z" />
 </svg>
 
+
 </div>
+
+
 
             <!-- Connecting Time -->
             <div class="vpn-connecting-text">Connecting Time</div>
@@ -118,24 +122,82 @@
 
     </div> <!-- end vpn-screen -->
 
-    <!-- SPEED TEST SCREEN -->
-    <div id="speed-test-screen" class="screen hidden">
-        <div class="vpn-card">
-            <div class="vpn-top-bar">
-                <div class="dropdown">
-                    <img src="assets/icons/category.svg" class="icon-button" />
-                    <div class="dropdown-content">
-                        <button id="nav-vpn" class="dropdown-item">VPN</button>
-                        <button id="nav-servers" class="dropdown-item">Servers</button>
-                    </div>
+  <!-- SPEED TEST SCREEN -->
+<div id="speed-test-screen" class="screen hidden">
+
+    <!-- Top Bar (reuse same VPN top bar style) -->
+    <div class="vpn-top-bar">
+        <!-- Back button -->
+        <svg class="icon-button-svg" viewBox="0 0 24 24" fill="white">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+        </svg>
+
+        <!-- Title -->
+        <span class="vpn-title">Speed Test</span>
+
+        <!-- Settings button -->
+        <svg class="icon-button-svg" viewBox="0 0 24 24" fill="white">
+            <path d="M19.14 12.936c.036-.3.06-.606.06-.936 0-.33-.024-.636-.06-.936l2.03-1.584a.5.5 0 00.12-.648l-1.924-3.33a.5.5 0 00-.605-.21l-2.39.96a7.978 7.978 0 00-1.62-.936l-.36-2.52A.5.5 0 0014.5 3h-5a.5.5 0 00-.495.42l-.36 2.52c-.588.24-1.14.54-1.62.936l-2.39-.96a.5.5 0 00-.605.21l-1.924 3.33a.5.5 0 00.12.648l2.03 1.584c-.036.3-.06.606-.06.936 0 .33.024.636.06.936l-2.03 1.584a.5.5 0 00-.12.648l1.924 3.33a.5.5 0 00.605.21l2.39-.96c.48.396 1.032.696 1.62.936l.36 2.52A.5.5 0 009.5 21h5a.5.5 0 00.495-.42l.36-2.52c.588-.24 1.14-.54 1.62-.936l2.39.96a.5.5 0 00.605-.21l1.924-3.33a.5.5 0 00-.12-.648l-2.03-1.584zM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17Z" />
+        </svg>
+    </div>
+
+    <!-- Speed Test Card -->
+    <div class="speed-test-card">
+
+        <!-- Toggle Buttons -->
+        <div class="speed-test-toggle">
+            <button class="speed-test-toggle-button active">Download</button>
+            <button class="speed-test-toggle-button">Upload</button>
+        </div>
+
+        <!-- Server Info -->
+        <div class="speed-test-server-info">
+            <!-- Server -->
+            <div class="server-item">
+                <img src="assets/icons/wifi.svg" class="server-icon" />
+                <div class="server-text">
+                    <div class="server-label">Server</div>
+                    <div class="server-name">ZYENFIS</div>
                 </div>
-                <span class="vpn-title">Speed Test</span>
-                <img src="assets/icons/settings.svg" class="icon-button" />
             </div>
 
-            <div class="vpn-connecting-text">Speed Test coming soon...</div>
+            <!-- Licence -->
+            <div class="server-item">
+                <img src="assets/icons/globe.svg" class="server-icon" />
+                <div class="server-text">
+                    <div class="server-label">Licence</div>
+                    <div class="server-name">Bulgaria</div>
+                </div>
+            </div>
         </div>
-    </div> <!-- end speed-test-screen -->
+
+        <!-- Speed Gauge -->
+        <div class="speed-gauge">
+            <svg class="speed-gauge-svg" viewBox="0 0 200 100">
+                <!-- Background arc -->
+                <path d="M 20 100 A 80 80 0 1 1 180 100" stroke="#eee" stroke-width="20" fill="none" />
+                <!-- Value arc -->
+                <path d="M 20 100 A 80 80 0 1 1 140 60" stroke="url(#grad)" stroke-width="20" fill="none" />
+                <defs>
+                    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#ffa726" />
+                        <stop offset="100%" stop-color="#fb8c00" />
+                    </linearGradient>
+                </defs>
+            </svg>
+
+            <!-- Speed Value -->
+            <div class="speed-current-value">27.82<br /><small>mb/s</small></div>
+        </div>
+
+        <!-- GO Button -->
+        <button id="speed-test-go" class="speed-test-go-button">GO</button>
+
+    </div> <!-- end card -->
+
+</div> <!-- end screen -->
+
+
 
     <!-- SERVERS SCREEN -->
     <div id="server-screen" class="screen hidden">

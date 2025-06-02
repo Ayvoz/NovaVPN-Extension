@@ -1,17 +1,22 @@
 /* ========================= */
 /* 🌟 MAIN PANEL (WHITE BACKGROUND) */
 /* ========================= */
+body {
+    font-family: 'Poppins', 'Inter', sans-serif;
+}
+
 .main-panel {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    background: #f7f7f7; /* Light background like reference */
+    background: linear-gradient(to bottom, #f7f7f7 0%, #f0f0f0 100%); /* POLISH */
     min-height: 100vh;
     width: 100%;
     padding: 16px;
     box-sizing: border-box;
 }
+
 
 /* ========================= */
 /* 🌟 SCREEN */
@@ -42,10 +47,11 @@
     background: radial-gradient(circle at center, #143c62 0%, #0c1c2c 100%);
     border-radius: 50px;
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.05);
-    padding: 24px 20px 80px 20px; /* FIXED */
+    padding: 24px 20px 80px 20px; /* POLISHED */
     margin-bottom: 0;
-    overflow: visible; /* ALSO IMPORTANT → so button can float */
+    overflow: visible; /* IMPORTANT */
 }
+
 
 
 /* ========================= */
@@ -65,26 +71,14 @@
     font-size: 16px;
 }
 
-.icon-button {
-    width: 36px;
-    height: 36px;
-    padding: 6px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.828);
-    backdrop-filter: blur(8px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
+
 
 .icon-button-svg {
     width: 36px;
     height: 36px;
     padding: 6px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0); /* FROSTED STYLE */
     backdrop-filter: blur(8px);
     cursor: pointer;
     transition: background-color 0.2s ease;
@@ -93,6 +87,7 @@
 .icon-button-svg:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
+
 
 
 
@@ -219,13 +214,15 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #1c1c1c; /* DARK text like reference */
+    color: #1c1c1c;
     font-size: 36px;
     font-weight: 900;
     text-align: center;
     line-height: 0.5;
     z-index: 3;
+    transition: all 0.3s ease; /* POLISH */
 }
+
 
 .vpn-speed-value small {
     font-size: 14px;
@@ -280,7 +277,7 @@
 /* ========================= */
 .vpn-button-background-line {
     width: 100%;
-    max-width: 176px;
+    max-width: 194px;
     height: 75px; /* Thickness of the line */
     background: #ffffff;
     border-radius: 50px;
@@ -294,7 +291,7 @@
 .vpn-start-button {
     position: relative; /* RELATIVE — not absolute */
     top: -57px; /* FLOATING → half navy / half white */
-    padding: 20px 50px;
+    padding: 20px 60px;
     font-size: 18px;
     font-weight: 900;
     border: none;
@@ -354,4 +351,149 @@
     width: 12px;
     height: 12px;
     filter: brightness(1000%) invert(100%);
+}
+
+/* ========================= */
+/* 🌟 SPEED TEST CARD */
+/* ========================= */
+.speed-test-card {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 50px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    padding: 24px 20px 48px 20px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+/* ========================= */
+/* 🌟 SPEED TEST TOGGLE */
+/* ========================= */
+.speed-test-toggle {
+    display: flex;
+    justify-content: center;
+    background: #f1f3f6;
+    border-radius: 50px;
+    padding: 6px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 280px;
+}
+
+.speed-test-toggle-button {
+    flex: 1;
+    padding: 12px 0;
+    border: none;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    background: transparent;
+    color: #666;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.speed-test-toggle-button.active {
+    background: linear-gradient(135deg, #ffa726, #fb8c00);
+    color: white;
+}
+
+/* ========================= */
+/* 🌟 SERVER INFO */
+/* ========================= */
+.speed-test-server-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 28px;
+}
+
+.server-item {
+    display: flex;
+    align-items: center;
+}
+
+.server-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+.server-text {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    color: #333;
+    font-weight: 600;
+}
+
+.server-label {
+    font-size: 12px;
+    color: #999;
+    font-weight: 500;
+}
+
+.server-name {
+    font-size: 14px;
+    color: #1c1c1c;
+    font-weight: 700;
+}
+
+/* ========================= */
+/* 🌟 SPEED GAUGE */
+/* ========================= */
+.speed-gauge {
+    position: relative;
+    width: 240px;
+    height: 140px;
+    margin-bottom: 20px;
+}
+
+.speed-gauge-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.speed-current-value {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 28px;
+    font-weight: 800;
+    color: #1c1c1c;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.speed-current-value small {
+    font-size: 14px;
+    color: #666;
+}
+
+/* ========================= */
+/* 🌟 GO BUTTON */
+/* ========================= */
+.speed-test-go-button {
+    margin-top: 16px;
+    padding: 18px 50px;
+    font-size: 18px;
+    font-weight: 900;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #ffa726, #fb8c00);
+    color: white;
+    box-shadow: 0px 12px 24px rgba(255, 152, 0, 0.6);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.speed-test-go-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 16px 28px rgba(255, 152, 0, 0.8);
 }
