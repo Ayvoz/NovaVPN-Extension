@@ -1,44 +1,84 @@
-// 🚀 DOM Elements
-const vpnScreen = document.getElementById('vpn-screen');
-const speedTestScreen = document.getElementById('speed-test-screen');
-const serverScreen = document.getElementById('server-screen');
+// 🚀 popup.js → FINAL VERSION (Login + Signup + VPN + Settings + Back + Logout)
 
-// 🌟 Navigation Buttons (dropdown)
-const navVpn = document.getElementById('nav-vpn');
-const navSpeed = document.getElementById('nav-speed');
-const navServers = document.getElementById('nav-servers');
+document.addEventListener("DOMContentLoaded", () => {
 
-// 🌟 BACK buttons (Top bar BACK SVGs)
-const backButtons = document.querySelectorAll('.icon-button-svg');
+    // Elements
+    const vpnScreen = document.getElementById("vpn-screen");
+    const loginScreen = document.getElementById("login-screen");
+    const signupScreen = document.getElementById("signup-screen");
+    const settingsScreen = document.getElementById("settings-screen");
 
-// 🚀 Function to show screen
-function showScreen(screenId) {
-    // Hide all screens first
-    vpnScreen.classList.add('hidden');
-    speedTestScreen.classList.add('hidden');
-    serverScreen.classList.add('hidden');
+    const loginButton = loginScreen.querySelector(".auth-button");
+    const signupButton = signupScreen.querySelector(".auth-button");
 
-    // Show the selected screen
-    document.getElementById(screenId).classList.remove('hidden');
-}
+    const goSignup = document.getElementById("go-signup");
+    const goLogin = document.getElementById("go-login");
 
-// 🚀 Navigation Events (Dropdown items)
-if (navVpn) {
-    navVpn.addEventListener('click', () => showScreen('vpn-screen'));
-}
-if (navSpeed) {
-    navSpeed.addEventListener('click', () => showScreen('speed-test-screen'));
-}
-if (navServers) {
-    navServers.addEventListener('click', () => showScreen('server-screen'));
-}
+    const logoutButton = document.getElementById("logout-button");
 
-// 🚀 BACK Button → always return to VPN screen
-backButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        showScreen('vpn-screen');
+    const settingsButton = document.getElementById("vpn-settings");
+
+    const backToVpnBtn = document.getElementById("back-to-vpn");
+
+    // 🚀 INITIAL LOAD → check login
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+    if (isLoggedIn === "true") {
+        showScreen("vpn-screen");
+    } else {
+        showScreen("login-screen");
+    }
+
+    // 🚀 LOGIN
+    loginButton.addEventListener("click", () => {
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("plan", "free");
+        showScreen("vpn-screen");
     });
+
+    // 🚀 SIGNUP
+    signupButton.addEventListener("click", () => {
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("plan", "free");
+        showScreen("vpn-screen");
+    });
+
+    // 🚀 GO TO SIGNUP
+    goSignup.addEventListener("click", () => {
+        showScreen("signup-screen");
+    });
+
+    // 🚀 GO TO LOGIN
+    goLogin.addEventListener("click", () => {
+        showScreen("login-screen");
+    });
+
+    // 🚀 OPEN SETTINGS
+    settingsButton.addEventListener("click", () => {
+        showScreen("settings-screen");
+        updateSettingsScreen(); // if you have premium lock logic
+    });
+
+    // 🚀 BACK TO VPN FROM SETTINGS
+    if (backToVpnBtn) {
+        backToVpnBtn.addEventListener("click", () => {
+            showScreen("vpn-screen");
+        });
+    }
+
+    // 🚀 LOGOUT
+    logoutButton.addEventListener("click", () => {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("plan");
+        showScreen("login-screen");
+    });
+
 });
 
-// 🚀 LOG to confirm working
-console.log('popup.js loaded — screen transitions ready 🚀');
+// 🚀 REUSABLE SCREEN SWITCH FUNCTION
+function showScreen(screenId) {
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.add('hidden');
+    });
+    document.getElementById(screenId).classList.remove('hidden');
+}

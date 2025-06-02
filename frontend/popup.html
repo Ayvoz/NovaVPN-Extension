@@ -122,103 +122,152 @@
 
     </div> <!-- end vpn-screen -->
 
-  <!-- SPEED TEST SCREEN -->
-<div id="speed-test-screen" class="screen hidden">
+    <!-- LOGIN SCREEN -->
+<div id="login-screen" class="screen">
 
-    <!-- Top Bar (reuse same VPN top bar style) -->
+    <div class="auth-card">
+        <h2 class="auth-title">Login to NovaVPN</h2>
+
+        <input type="text" class="auth-input" placeholder="Email" />
+        <input type="password" class="auth-input" placeholder="Password" />
+
+        <button class="auth-button">Login</button>
+
+        <div class="auth-link">
+            Don't have an account? 
+            <span id="go-signup" class="auth-link-action">Sign up</span>
+        </div>
+    </div>
+
+</div>
+<!-- SIGNUP SCREEN -->
+<div id="signup-screen" class="screen hidden">
+
+    <div class="auth-card">
+        <h2 class="auth-title">Create your NovaVPN Account</h2>
+
+        <input type="text" class="auth-input" placeholder="Email" />
+        <input type="password" class="auth-input" placeholder="Password" />
+        <input type="password" class="auth-input" placeholder="Confirm Password" />
+
+        <button class="auth-button">Sign Up</button>
+
+        <div class="auth-link">
+            Already have an account? 
+            <span id="go-login" class="auth-link-action">Login</span>
+        </div>
+    </div>
+
+</div>
+<!-- SETTINGS SCREEN -->
+<div id="settings-screen" class="screen hidden">
+
+    <!-- Top Bar -->
     <div class="vpn-top-bar">
         <!-- Back button -->
         <svg class="icon-button-svg" viewBox="0 0 24 24" fill="white">
             <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
         </svg>
-
-        <!-- Title -->
-        <span class="vpn-title">Speed Test</span>
-
-        <!-- Settings button -->
-        <svg class="icon-button-svg" viewBox="0 0 24 24" fill="white">
-            <path d="M19.14 12.936c.036-.3.06-.606.06-.936 0-.33-.024-.636-.06-.936l2.03-1.584a.5.5 0 00.12-.648l-1.924-3.33a.5.5 0 00-.605-.21l-2.39.96a7.978 7.978 0 00-1.62-.936l-.36-2.52A.5.5 0 0014.5 3h-5a.5.5 0 00-.495.42l-.36 2.52c-.588.24-1.14.54-1.62.936l-2.39-.96a.5.5 0 00-.605.21l-1.924 3.33a.5.5 0 00.12.648l2.03 1.584c-.036.3-.06.606-.06.936 0 .33.024.636.06.936l-2.03 1.584a.5.5 0 00-.12.648l1.924 3.33a.5.5 0 00.605.21l2.39-.96c.48.396 1.032.696 1.62.936l.36 2.52A.5.5 0 009.5 21h5a.5.5 0 00.495-.42l.36-2.52c.588-.24 1.14-.54 1.62-.936l2.39.96a.5.5 0 00.605-.21l1.924-3.33a.5.5 0 00-.12-.648l-2.03-1.584zM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17Z" />
-        </svg>
+        <span class="vpn-title">Settings</span>
+        <div style="width:36px;"></div>
     </div>
 
-    <!-- Speed Test Card -->
+    <!-- Settings Card -->
     <div class="speed-test-card">
 
-        <!-- Toggle Buttons -->
-        <div class="speed-test-toggle">
-            <button class="speed-test-toggle-button active">Download</button>
-            <button class="speed-test-toggle-button">Upload</button>
-        </div>
+        <!-- GENERAL -->
+        <h3 class="settings-section-title">
+            <img src="assets/icons/settings-general.svg" class="settings-section-icon" />
+            General
+        </h3>
 
-        <!-- Server Info -->
-        <div class="speed-test-server-info">
-            <!-- Server -->
-            <div class="server-item">
-                <img src="assets/icons/wifi.svg" class="server-icon" />
-                <div class="server-text">
-                    <div class="server-label">Server</div>
-                    <div class="server-name">ZYENFIS</div>
-                </div>
-            </div>
+        <label class="settings-toggle">
+            <input type="checkbox" />
+            Auto-connect on browser launch
+        </label>
 
-            <!-- Licence -->
-            <div class="server-item">
-                <img src="assets/icons/globe.svg" class="server-icon" />
-                <div class="server-text">
-                    <div class="server-label">Licence</div>
-                    <div class="server-name">Bulgaria</div>
-                </div>
-            </div>
-        </div>
+        <label class="settings-toggle">
+            <input type="checkbox" />
+            Auto-connect to last server
+        </label>
 
-        <!-- Speed Gauge -->
-        <div class="speed-gauge">
-            <svg class="speed-gauge-svg" viewBox="0 0 200 100">
-                <!-- Background arc -->
-                <path d="M 20 100 A 80 80 0 1 1 180 100" stroke="#eee" stroke-width="20" fill="none" />
-                <!-- Value arc -->
-                <path d="M 20 100 A 80 80 0 1 1 140 60" stroke="url(#grad)" stroke-width="20" fill="none" />
-                <defs>
-                    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#ffa726" />
-                        <stop offset="100%" stop-color="#fb8c00" />
-                    </linearGradient>
-                </defs>
-            </svg>
+        <label class="settings-toggle locked">
+            <input type="checkbox" disabled />
+            Kill Switch <span class="premium-badge">Premium</span>
+        </label>
 
-            <!-- Speed Value -->
-            <div class="speed-current-value">27.82<br /><small>mb/s</small></div>
-        </div>
+        <!-- VPN PROTOCOL -->
+        <h3 class="settings-section-title">
+            <img src="assets/icons/protocol.svg" class="settings-section-icon" />
+            VPN Protocol
+        </h3>
 
-        <!-- GO Button -->
-        <button id="speed-test-go" class="speed-test-go-button">GO</button>
+        <select class="settings-select">
+            <option>Automatic</option>
+            <option disabled>WireGuard 🔒 Premium</option>
+            <option disabled>OpenVPN 🔒 Premium</option>
+            <option disabled>IKEv2 🔒 Premium</option>
+        </select>
 
-    </div> <!-- end card -->
+        <!-- PRIVACY -->
+        <h3 class="settings-section-title">
+            <img src="assets/icons/shield.svg" class="settings-section-icon" />
+            Privacy
+        </h3>
 
-</div> <!-- end screen -->
+        <label class="settings-toggle locked">
+            <input type="checkbox" disabled />
+            DNS Leak Protection <span class="premium-badge">Premium</span>
+        </label>
 
+        <label class="settings-toggle locked">
+            <input type="checkbox" disabled />
+            IPv6 Leak Protection <span class="premium-badge">Premium</span>
+        </label>
 
+        <label class="settings-toggle locked">
+            <input type="checkbox" disabled />
+            Block Malware / Ads / Trackers <span class="premium-badge">Premium</span>
+        </label>
 
-    <!-- SERVERS SCREEN -->
-    <div id="server-screen" class="screen hidden">
-        <div class="vpn-card">
-            <div class="vpn-top-bar">
-                <div class="dropdown">
-                    <img src="assets/icons/category.svg" class="icon-button" />
-                    <div class="dropdown-content">
-                        <button id="nav-vpn" class="dropdown-item">VPN</button>
-                        <button id="nav-speed" class="dropdown-item">Speed Test</button>
-                    </div>
-                </div>
-                <span class="vpn-title">Servers</span>
-                <img src="assets/icons/settings.svg" class="icon-button" />
-            </div>
+        <!-- APPEARANCE -->
+        <h3 class="settings-section-title">
+            <img src="assets/icons/appearance.svg" class="settings-section-icon" />
+            Appearance
+        </h3>
 
-            <div class="vpn-connecting-text">Server List coming soon...</div>
-        </div>
-    </div> <!-- end server-screen -->
+        <label class="settings-toggle">
+            <input type="checkbox" />
+            Dark Mode
+        </label>
 
-</div> <!-- end main-panel -->
+        <!-- ACCOUNT -->
+        <h3 class="settings-section-title">
+            <img src="assets/icons/account.svg" class="settings-section-icon" />
+            Account
+        </h3>
+
+        <div class="subscription-info">Plan: Free</div>
+        <div class="subscription-info">Expiry: -</div>
+        <a href="#" class="subscription-manage-link">Manage Subscription</a>
+
+        <!-- LOGOUT -->
+        <button id="logout-button" class="settings-logout-button">Logout</button>
+
+        <!-- ABOUT -->
+        <h3 class="settings-section-title">
+            <img src="assets/icons/info.svg" class="settings-section-icon" />
+            About
+        </h3>
+
+        <div class="subscription-info">Version: 1.0.0</div>
+        <a href="#" class="subscription-manage-link">Privacy Policy</a>
+        <a href="#" class="subscription-manage-link">Terms of Service</a>
+        <a href="#" class="subscription-manage-link">Report a Bug</a>
+
+    </div>
+
+</div>
 
 </body>
 </html>
