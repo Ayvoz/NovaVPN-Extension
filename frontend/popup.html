@@ -37,8 +37,8 @@
     <span class="vpn-title">NovaVPN</span>
 
 <!-- INLINE SVG for prettier settings -->
-<svg class="icon-button-svg" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-    <path d="M19.14 12.936c.036-.3.06-.606.06-.936 0-.33-.024-.636-.06-.936l2.03-1.584a.5.5 0 00.12-.648l-1.924-3.33a.5.5 0 00-.605-.21l-2.39.96a7.978 7.978 0 00-1.62-.936l-.36-2.52A.5.5 0 0014.5 3h-5a.5.5 0 00-.495.42l-.36 2.52c-.588.24-1.14.54-1.62.936l-2.39-.96a.5.5 0 00-.605.21l-1.924 3.33a.5.5 0 00.12.648l2.03 1.584c-.036.3-.06.606-.06.936 0 .33.024.636.06.936l-2.03 1.584a.5.5 0 00-.12.648l1.924 3.33a.5.5 0 00.605.21l2.39-.96c.48.396 1.032.696 1.62.936l.36 2.52A.5.5 0 009.5 21h5a.5.5 0 00.495-.42l.36-2.52c.588-.24 1.14-.54 1.62-.936l2.39.96a.5.5 0 00.605-.21l1.924-3.33a.5.5 0 00-.12-.648l-2.03-1.584zM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17Z" />
+<svg id="vpn-settings" class="icon-button-svg" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" style="cursor:pointer;">
+    <path d="M19.14 12.936c...Z" />
 </svg>
 
 
@@ -113,7 +113,7 @@
 
         <!-- Server Pill -->
         <div class="vpn-server-pill" id="vpn-server-pill">
-            <img src="assets/flags/country-flags/svg/us.svg" class="vpn-server-flag" />
+            <img src="assets/flags/us.svg" class="vpn-server-flag" />
             <span class="vpn-server-text">LA, United States</span>
             <div class="vpn-server-arrow">
                 <img src="assets/icons/arrow-right.svg" />
@@ -164,108 +164,106 @@
 
     <!-- Top Bar -->
     <div class="vpn-top-bar">
-        <!-- Back button -->
-        <svg class="icon-button-svg" viewBox="0 0 24 24" fill="white">
-            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-        </svg>
+        <button id="back-to-vpn" class="back-button">
+            <!-- Back Arrow SVG -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 18l-6-6 6-6" />
+            </svg>
+        </button>
         <span class="vpn-title">Settings</span>
-        <div style="width:36px;"></div>
     </div>
 
-    <!-- Settings Card -->
-    <div class="speed-test-card">
-
-        <!-- GENERAL -->
-        <h3 class="settings-section-title">
-            <img src="assets/icons/settings-general.svg" class="settings-section-icon" />
+    <!-- GENERAL SECTION -->
+    <div class="settings-section">
+        <div class="settings-section-title">
+            <img src="assets/icons/settings.svg" class="settings-section-icon" />
             General
-        </h3>
+        </div>
+        <div class="settings-item">
+            <label class="settings-label">Auto-connect on browser launch</label>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="settings-item">
+            <label class="settings-label">Auto-connect to last server</label>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="settings-item premium-disabled">
+            <label class="settings-label">Kill Switch <span class="premium-badge">Premium</span></label>
+            <label class="switch">
+                <input type="checkbox" disabled>
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
 
-        <label class="settings-toggle">
-            <input type="checkbox" />
-            Auto-connect on browser launch
-        </label>
-
-        <label class="settings-toggle">
-            <input type="checkbox" />
-            Auto-connect to last server
-        </label>
-
-        <label class="settings-toggle locked">
-            <input type="checkbox" disabled />
-            Kill Switch <span class="premium-badge">Premium</span>
-        </label>
-
-        <!-- VPN PROTOCOL -->
-        <h3 class="settings-section-title">
-            <img src="assets/icons/protocol.svg" class="settings-section-icon" />
+    <!-- VPN PROTOCOL -->
+    <div class="settings-section">
+        <div class="settings-section-title">
+            <img src="assets/icons/network.svg" class="settings-section-icon" />
             VPN Protocol
-        </h3>
-
-        <select class="settings-select">
+        </div>
+        <select class="settings-dropdown">
             <option>Automatic</option>
-            <option disabled>WireGuard 🔒 Premium</option>
-            <option disabled>OpenVPN 🔒 Premium</option>
-            <option disabled>IKEv2 🔒 Premium</option>
+            <option>WireGuard</option>
+            <option>OpenVPN</option>
+            <option>IKEv2</option>
         </select>
+    </div>
 
-        <!-- PRIVACY -->
-        <h3 class="settings-section-title">
+    <!-- PRIVACY -->
+    <div class="settings-section">
+        <div class="settings-section-title">
             <img src="assets/icons/shield.svg" class="settings-section-icon" />
             Privacy
-        </h3>
-
-        <label class="settings-toggle locked">
-            <input type="checkbox" disabled />
-            DNS Leak Protection <span class="premium-badge">Premium</span>
-        </label>
-
-        <label class="settings-toggle locked">
-            <input type="checkbox" disabled />
-            IPv6 Leak Protection <span class="premium-badge">Premium</span>
-        </label>
-
-        <label class="settings-toggle locked">
-            <input type="checkbox" disabled />
-            Block Malware / Ads / Trackers <span class="premium-badge">Premium</span>
-        </label>
-
-        <!-- APPEARANCE -->
-        <h3 class="settings-section-title">
-            <img src="assets/icons/appearance.svg" class="settings-section-icon" />
-            Appearance
-        </h3>
-
-        <label class="settings-toggle">
-            <input type="checkbox" />
-            Dark Mode
-        </label>
-
-        <!-- ACCOUNT -->
-        <h3 class="settings-section-title">
-            <img src="assets/icons/account.svg" class="settings-section-icon" />
-            Account
-        </h3>
-
-        <div class="subscription-info">Plan: Free</div>
-        <div class="subscription-info">Expiry: -</div>
-        <a href="#" class="subscription-manage-link">Manage Subscription</a>
-
-        <!-- LOGOUT -->
-        <button id="logout-button" class="settings-logout-button">Logout</button>
-
-        <!-- ABOUT -->
-        <h3 class="settings-section-title">
-            <img src="assets/icons/info.svg" class="settings-section-icon" />
-            About
-        </h3>
-
-        <div class="subscription-info">Version: 1.0.0</div>
-        <a href="#" class="subscription-manage-link">Privacy Policy</a>
-        <a href="#" class="subscription-manage-link">Terms of Service</a>
-        <a href="#" class="subscription-manage-link">Report a Bug</a>
-
+        </div>
+        <div class="settings-item premium-disabled">
+            <label class="settings-label">DNS Leak Protection <span class="premium-badge">Premium</span></label>
+            <label class="switch">
+                <input type="checkbox" disabled>
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="settings-item premium-disabled">
+            <label class="settings-label">IPv6 Leak Protection <span class="premium-badge">Premium</span></label>
+            <label class="switch">
+                <input type="checkbox" disabled>
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="settings-item premium-disabled">
+            <label class="settings-label">Block Ads / Trackers <span class="premium-badge">Premium</span></label>
+            <label class="switch">
+                <input type="checkbox" disabled>
+                <span class="slider"></span>
+            </label>
+        </div>
     </div>
+
+    <!-- APPEARANCE -->
+    <div class="settings-section">
+        <div class="settings-section-title">
+            <img src="assets/icons/moon.svg" class="settings-section-icon" />
+            Appearance
+        </div>
+        <div class="settings-item">
+            <label class="settings-label">Dark Mode</label>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+
+    <!-- LOGOUT BUTTON -->
+    <button id="logout-button" class="logout-button">Log out</button>
+
+</div> <!-- end settings-screen -->
 
 </div>
 
