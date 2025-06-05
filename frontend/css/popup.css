@@ -91,47 +91,6 @@ body {
 
 
 
-/* ========================= */
-/* 🌟 DROPDOWN NAV */
-/* ========================= */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    top: 40px;
-    left: 0;
-    background-color: #1c3f60;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-    padding: 8px 0;
-    z-index: 100;
-    min-width: 140px;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown-item {
-    display: block;
-    width: 100%;
-    padding: 10px 16px;
-    color: white;
-    text-align: left;
-    background: none;
-    border: none;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.dropdown-item:hover {
-    background-color: rgba(255,255,255,0.1);
-}
 
 /* ========================= */
 /* 🌟 CONNECTING TIME */
@@ -169,21 +128,17 @@ body {
     box-shadow: 0 0 0 rgba(255, 138, 0, 0.5);
 }
 
-.vpn-speed-ring-center {
+.vpn-speed-ring-center-svg {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 120px; /* FIXED — smaller */
-    height: 120px; /* FIXED — smaller */
-    border-radius: 50%;
-    background: white;
-    box-shadow: 
-        0 0 12px rgba(255, 255, 255, 0.5), 
-        0 0 32px rgba(255, 255, 255, 0.4), 
-        0 0 48px rgba(255, 255, 255, 0.3);
-    z-index: 1;
+    width: 10000px;
+    height: 190px;
+    z-index: 2; /* above orange, below text */
+    filter: drop-shadow(0 0 20px rgba(255,255,255,0.3));
 }
+
 
 
 .vpn-speed-ring-svg {
@@ -206,6 +161,9 @@ body {
     100% {
         transform: scale(1);
         filter: drop-shadow(0 16px 16px rgba(255, 138, 0, 0.6));
+    }
+    {
+         filter: drop-shadow(0 0 20px rgba(255,255,255,0.3));
     }
 }
 
@@ -339,12 +297,12 @@ body {
 .vpn-server-arrow {
     width: 30px;
     height: 30px;
-    border-radius: 50%;
+    border-radius: 20%;
     background: linear-gradient(135deg, #ffa726, #fb8c00);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 6px rgba(209, 54, 54, 0.2);
 }
 
 .vpn-server-arrow img {
@@ -586,4 +544,134 @@ input:checked + .slider:before {
 .logout-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 16px 32px rgba(255, 152, 0, 0.5);
+}
+/* ========================= */
+/* 🌟 SERVER PICKER FLOATING CARD */
+/* ========================= */
+.server-picker {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 420px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    padding: 20px;
+    z-index: 1000;
+}
+
+.server-picker-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.server-picker-title {
+    font-weight: 800;
+    font-size: 16px;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.close-button:hover {
+    background: rgba(0,0,0,0.05);
+}
+
+.server-list {
+    max-height: 250px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.server-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: #f8f8f8;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.server-item:hover {
+    background: #f1f1f1;
+}
+
+.server-flag {
+    width: 30px;
+    height: 20px;
+    border-radius: 4px;
+}
+
+.server-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+}
+
+.hidden {
+    display: none;
+}
+/* SERVER LIST ITEMS */
+.server-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.server-item:hover {
+    background-color: #f7f7f7;
+}
+
+.server-flag {
+    width: 32px;
+    height: 20px;
+    margin-right: 12px;
+}
+
+.server-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+}
+
+.premium-server {
+    opacity: 0.6;
+    pointer-events: none; /* disable click */
+}
+
+.premium-badge {
+    background: linear-gradient(135deg, #ffa726, #fb8c00);
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 8px;
+    margin-left: 6px;
+}
+
+/* LIVE SEARCH STYLING (optional improvement) */
+.server-search {
+    width: 90%;
+    padding: 10px 14px;
+    margin: 12px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
 }
