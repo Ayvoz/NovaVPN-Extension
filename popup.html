@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VPN Extension</title>
+    <link rel="stylesheet" href="css/popup.css" />
+    <script defer src="dist/popup.bundle.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+</head>
+<body>
+
+<!-- MAIN PANEL -->
+<div class="main-panel">
+
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen" class="screen">
+        <div class="auth-card">
+            <h2 class="auth-title">Login to NovaVPN</h2>
+            <input type="text" class="auth-input" placeholder="Email" />
+            <input type="password" class="auth-input" placeholder="Password" />
+            <button class="auth-button">Login</button>
+            <div class="auth-link">
+                Don't have an account? 
+                <span id="go-signup" class="auth-link-action">Sign up</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- SIGNUP SCREEN -->
+    <div id="signup-screen" class="screen hidden">
+        <div class="auth-card">
+            <h2 class="auth-title">Create your NovaVPN Account</h2>
+            <input type="text" class="auth-input" placeholder="Email" />
+            <input type="password" class="auth-input" placeholder="Password" />
+            <input type="password" class="auth-input" placeholder="Confirm Password" />
+            <button class="auth-button">Sign Up</button>
+            <div class="auth-link">
+                Already have an account? 
+                <span id="go-login" class="auth-link-action">Login</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- VPN SCREEN -->
+    <div id="vpn-screen" class="screen hidden">
+        <!-- New Header -->
+        <div class="header">
+            <div class="left-section">
+                
+                <span class="app-title">NovaVPN</span>
+            </div>
+            <div class="right-section">
+                <div class="premium-badge">
+                    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="premium-icon"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"/></svg>
+                    <span>Premium</span>
+                </div>
+                <svg id="vpn-settings" class="icon-button-svg" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" style="cursor:pointer;">
+                    <path d="M19.14 12.936c.036-.3.06-.606.06-.936 0-.33-.024-.636-.06-.936l2.03-1.584a.5.5 0 00.12-.648l-1.924-3.33a.5.5 0 00-.605-.21l-2.39.96a7.978 7.978 0 00-1.62-.936l-.36-2.52A.5.5 0 0014.5 3h-5a.5.5 0 00-.495.42l-.36 2.52c-.588.24-1.14.54-1.62.936l-2.39-.96a.5.5 0 00-.605.21l-1.924 3.33a.5.5 0 00.12.648l2.03 1.584c-.036.3-.06.606-.06.936 0 .33.024.636.06.936l-2.03 1.584a.5.5 0 00-.12.648l1.924 3.33a.5.5 0 00.605.21l2.39-.96c.48.396 1.032.696 1.62.936l.36 2.52A.5.5 0 009.5 21h5a.5.5 0 00.495-.42l.36-2.52c.588-.24 1.14-.54 1.62-.936l2.39.96a.5.5 0 00.605-.21l1.924-3.33a.5.5 0 00-.12-.648l-2.03-1.584zM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17Z" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- Status Indicator -->
+        <div class="connection-status">
+            <span class="status-dot connected"></span>
+            <span class="status-text">Connected</span>
+        </div>
+
+        <!-- Timer -->
+        <div class="vpn-timer" id="vpn-timer">00:15:24</div>
+
+        <!-- Power Button Area -->
+        <div class="power-button-area">
+            <button id="vpn-power-button" class="power-button">
+                <svg class="power-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                    <line x1="12" y1="2" x2="12" y2="12"></line>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Server Selection Pill -->
+        <div id="server-selection-pill" class="server-selection-pill">
+            <img src="assets/flags/sg.svg" alt="Singapore Flag" class="server-flag">
+            <div class="server-info">
+                <span class="server-name">Singapore</span>
+            </div>
+            <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="vpn-stats-row-new">
+            <div class="vpn-stat-new">
+                <svg class="stat-icon-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="7 13 12 18 17 13"></polyline>
+                    <polyline points="7 6 12 11 17 6"></polyline>
+                </svg>
+                <div class="stat-label-new">Download</div>
+                <div class="stat-value-new" id="vpn-download-speed">30.8 <small>Mbps</small></div>
+            </div>
+            <div class="vpn-stat-new">
+                <svg class="stat-icon-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="17 11 12 6 7 11"></polyline>
+                    <polyline points="17 18 12 13 7 18"></polyline>
+                </svg>
+                <div class="stat-label-new">Upload</div>
+                <div class="stat-value-new" id="vpn-upload-speed">20.8 <small>Mbps</small></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="vpn-footer-text">
+            By using the extension your agree with <a href="#" class="footer-link">Terms & Conditions</a> and <a href="#" class="footer-link">Privacy Policy</a>
+        </div>
+
+    </div> <!-- end vpn-screen -->
+
+    <!-- SERVER LIST SCREEN -->
+    <div id="server-list-screen" class="screen hidden">
+        <div class="vpn-top-bar">
+            <button id="back-to-vpn-from-servers" class="back-button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+            </button>
+            <span class="vpn-title">Select Server</span>
+        </div>
+        <div class="search-bar-container">
+            <input type="text" id="server-search-input" class="auth-input" placeholder="Search servers...">
+        </div>
+        <div class="server-list-container" id="server-list-container">
+            <!-- Server items will be dynamically loaded here by JavaScript -->
+        </div>
+    </div> <!-- end server-list-screen -->
+
+    <!-- SETTINGS SCREEN -->
+    <div id="settings-screen" class="screen hidden">
+        <!-- Top Bar -->
+        <div class="vpn-top-bar">
+            <button id="back-to-vpn" class="back-button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+            </button>
+            <span class="vpn-title">Settings</span>
+        </div>
+
+        <!-- Settings Card -->
+        <div class="settings-section">
+            <div class="settings-item">
+                <label class="settings-label">Auto-connect on launch</label>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="settings-item">
+                <label class="settings-label">Dark Mode</label>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="settings-item">
+                <label class="settings-label">Notifications</label>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <button id="logout-button" class="vpn-start-button" style="margin: 32px 0 0 0; width: 100%; border-radius: 16px; font-size: 17px; font-weight: 800; box-shadow: 0 4px 16px rgba(251, 140, 0, 0.10); padding: 18px 0; transform: none; letter-spacing: 1px;">LOGOUT</button>
+        </div>
+    </div> <!-- end settings-screen -->
+
+</div> <!-- end main-panel -->
+
+<div id="notification-toast"></div>
+
+</body>
+</html>

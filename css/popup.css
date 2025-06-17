@@ -1,0 +1,948 @@
+/* ========================= */
+/* 🌟 ENHANCED VPN EXTENSION CSS */
+/* ========================= */
+
+/* Custom Properties for Dynamic Theming */
+:root {
+    --primary-color: #2a2e43; /* Dark purple/blue background */
+    --secondary-color: #3e4466; /* Card background */
+    --accent-color: #7b61ff; /* Accent for buttons/highlights */
+    --text-light: #e0e0e0; /* Light text */
+    --text-muted: #a0a0a0; /* Muted text */
+    --success-color: #4CAF50; /* Green for connected status */
+    --shadow-dark: rgba(0, 0, 0, 0.3);
+    --shadow-light: rgba(0, 0, 0, 0.15);
+    --border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ========================= */
+/* 🌟 MAIN PANEL & BODY */
+/* ========================= */
+body {
+    font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    width: 380px;
+    height: 600px;
+    margin: 0;
+    padding: 0;
+    background-color: var(--primary-color);
+    background-attachment: fixed;
+    overflow: hidden; /* Ensure content doesn't overflow after scaling */
+    position: relative;
+    color: var(--text-light);
+    transform: scale(0.85); /* Zoom out a little more */
+    transform-origin: top center; /* Scale from top center */
+}
+
+/* Remove old background animations for better performance */
+body::before,
+body::after {
+    display: none;
+}
+
+.main-panel {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* ========================= */
+/* 🌟 SCREEN TRANSITIONS */
+/* ========================= */
+.screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    flex-grow: 1; /* Allow screen to take available space */
+    position: relative;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.screen.hidden {
+    display: none;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.screen:not(.hidden) {
+    animation: slideInUp 0.4s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================= */
+/* 🌟 VPN SCREEN LAYOUT (NEW) */
+/* ========================= */
+#vpn-screen {
+    justify-content: space-between; /* Distribute content top to bottom */
+    padding-top: 10px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+}
+
+.app-logo {
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+}
+
+.app-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-light);
+}
+
+.right-section {
+    display: flex;
+    align-items: center;
+}
+
+.premium-badge {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-right: 24px;
+}
+
+.premium-icon {
+    width: 16px;
+    height: 16px;
+    color: #FFD700; /* Gold color for premium icon */
+    margin-right: 4px;
+}
+
+.icon-button-svg {
+    width: 36px;
+    height: 36px;
+    padding: 6px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.08));
+    margin-left: 8px;
+}
+
+.icon-button-svg:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.connection-status {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.status-dot.connected {
+    background-color: var(--success-color);
+    box-shadow: 0 0 8px var(--success-color);
+}
+
+.status-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.vpn-timer {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 30px;
+}
+
+.power-button-area {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #3a405a 0%, #2f344d 100%);
+    box-shadow: 
+        inset 0 0 10px rgba(0, 0, 0, 0.5), 
+        inset 0 0 20px rgba(0, 0, 0, 0.2),
+        0 10px 20px rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.power-button {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #7b61ff, #563fcb); /* Purple gradient */
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 
+        0 5px 15px rgba(0, 0, 0, 0.3),
+        inset 0 0 10px rgba(255, 255, 255, 0.2); /* Subtle inner glow */
+    transition: all 0.2s ease-out;
+}
+
+.power-button:hover {
+    transform: scale(1.05);
+    box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.4),
+        inset 0 0 15px rgba(255, 255, 255, 0.3); 
+}
+
+.power-button:active {
+    transform: scale(0.98);
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.2),
+        inset 0 0 5px rgba(255, 255, 255, 0.1); 
+}
+
+.power-icon {
+    width: 48px;
+    height: 48px;
+    color: white;
+}
+
+.server-selection-pill {
+    width: 100%;
+    background-color: var(--secondary-color);
+    border-radius: 16px;
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 10px var(--shadow-dark);
+    margin-bottom: 25px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-out, transform 0.1s ease-out;
+}
+
+.server-selection-pill:hover {
+    background-color: #4a5078;
+    transform: translateY(-2px);
+}
+
+.server-flag {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+.server-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.server-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.server-ip {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.arrow-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--text-muted);
+}
+
+.vpn-stats-row-new {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.vpn-stat-new {
+    flex: 1;
+    background-color: var(--secondary-color);
+    border-radius: 16px;
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 10px var(--shadow-dark);
+    margin: 0 8px;
+    transition: background-color 0.2s ease-out, transform 0.1s ease-out;
+}
+
+.vpn-stat-new:first-child {
+    margin-left: 0;
+}
+
+.vpn-stat-new:last-child {
+    margin-right: 0;
+}
+
+.vpn-stat-new:hover {
+    background-color: #4a5078;
+    transform: translateY(-2px);
+}
+
+.stat-icon-new {
+    width: 28px;
+    height: 28px;
+    color: var(--accent-color);
+    margin-bottom: 5px;
+}
+
+.stat-label-new {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+}
+
+.stat-value-new {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.stat-value-new small {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.vpn-footer-text {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.5;
+    padding: 0 10px; /* Add some horizontal padding */
+}
+
+.footer-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease-out;
+}
+
+.footer-link:hover {
+    color: #9c80ff;
+}
+
+/* ========================= */
+/* 🌟 AUTH CARD (Login/Signup) - Updated for new theme */
+/* ========================= */
+.auth-card {
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--secondary-color);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    box-shadow: 0 6px 20px var(--shadow-dark);
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.auth-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.auth-card::before {
+    display: none; /* Remove old glow effect */
+}
+
+.auth-title {
+    color: var(--text-light);
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    text-align: center;
+    letter-spacing: -0.2px;
+}
+
+.auth-input {
+    width: calc(100% - 24px);
+    padding: 14px 12px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.05); /* Very subtle transparent white */
+    color: var(--text-light);
+    font-size: 15px;
+    outline: none;
+    transition: all 0.2s ease-out;
+}
+
+.auth-input::placeholder {
+    color: var(--text-muted);
+}
+
+.auth-input:focus {
+    border-color: var(--accent-color);
+    transform: translateY(0);
+    box-shadow: 0 2px 8px var(--shadow-dark);
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly more opaque on focus */
+}
+
+.auth-button {
+    width: 100%;
+    padding: 16px 0;
+    background: var(--accent-color); /* Use accent color */
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Softer shadow */
+    transition: all 0.2s ease-out;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.auth-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent); /* Softer glow */
+    transition: all 0.4s ease-out;
+    z-index: 1;
+}
+
+.auth-button:hover::before {
+    left: 100%;
+}
+
+.auth-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    background: #6a4fe3; /* Slightly darker accent on hover */
+}
+
+.auth-link {
+    margin-top: 20px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.auth-link-action {
+    color: var(--accent-color);
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s ease-out;
+}
+
+.auth-link-action:hover {
+    color: #9c80ff;
+}
+
+/* ========================= */
+/* 🌟 SETTINGS SECTION - Updated for new theme */
+/* ========================= */
+#settings-screen {
+    justify-content: flex-start;
+    padding-top: 10px; /* Adjust padding for consistency with VPN screen */
+}
+
+#settings-screen .vpn-top-bar {
+    display: flex; /* Ensure top bar is displayed */
+    justify-content: flex-start; /* Align back button to left */
+    align-items: center;
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+#settings-screen .vpn-title {
+    color: var(--text-light);
+    font-weight: 800;
+    font-size: 24px;
+    letter-spacing: 0.5px;
+    margin-left: 15px; /* Space between back button and title */
+}
+
+.back-button {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+}
+
+.back-button svg {
+    width: 20px;
+    height: 20px;
+    color: var(--text-light);
+}
+
+.back-button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(-1px);
+}
+
+.settings-section {
+    width: 100%;
+    max-width: 320px;
+    background-color: var(--secondary-color);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    box-shadow: 0 6px 20px var(--shadow-dark);
+    padding: 20px;
+    margin: 0 auto; /* Center the settings section */
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.settings-section:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.settings-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    transition: all 0.2s ease-out;
+}
+
+.settings-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.settings-item:hover {
+    background: transparent;
+    transform: translateX(0);
+}
+
+.settings-label {
+    color: var(--text-light);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    transition: all 0.2s ease-out;
+}
+
+.switch:hover {
+    transform: scale(1.02);
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.15);
+    transition: all 0.2s ease-out;
+    border-radius: 24px;
+    border: 1px solid var(--border-color);
+}
+
+.slider:before {
+    position: absolute;
+    content: '';
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: all 0.2s ease-out;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+input:checked + .slider {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+#logout-button.vpn-start-button {
+    position: static;
+    transform: none;
+    margin: 24px auto 0 auto;
+    width: 90%;
+    max-width: 280px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Adjusted shadow */
+    padding: 16px 0;
+    letter-spacing: 0.5px;
+    background: var(--accent-color); /* Use accent color for consistency */
+}
+
+#logout-button.vpn-start-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    background: #6a4fe3; /* Slightly darker accent on hover */
+}
+
+/* ========================= */
+/* 🌟 GLOBAL UTILITIES & CLEANUP */
+/* ========================= */
+.hidden {
+    display: none !important;
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.slide-up {
+    animation: slideUp 0.3s ease-out forwards;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.text-gradient {
+    background: linear-gradient(45deg, #ffa726, #fb8c00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.glass-effect {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    transition: background 0.2s ease-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Remove redundant animations and refine transitions */
+@keyframes extensionLoad { /* Keep keyframes but don't apply */
+    0% { opacity: 0; transform: translateY(-10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Refine hover effects and shadows */
+.vpn-card, .settings-section, .auth-card {
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.vpn-card:hover, .settings-section:hover, .auth-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.vpn-start-button, .auth-button, #logout-button {
+    transition: all 0.2s ease-out;
+}
+
+.vpn-start-button:hover, .auth-button:hover, #logout-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(251, 140, 0, 0.3);
+}
+
+.switch {
+    transition: all 0.2s ease-out;
+}
+
+.switch:hover {
+    transform: scale(1.02);
+}
+
+.vpn-speed-ring-wrapper.connected::after {
+    animation: none; /* Remove pulseRing for now */
+}
+
+@keyframes pulseRing { /* Keep keyframes but don't apply */
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+    50% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.8; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+}
+
+.vpn-stat {
+    transition: all 0.2s ease-out;
+}
+
+.vpn-stat:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+@keyframes gradientShift { /* Keep keyframes but don't apply */
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body {
+    background-size: auto; /* Reset background size */
+    animation: none; /* Ensure no unwanted animations are applied */
+}
+
+.back-button {
+    transition: all 0.2s ease-out;
+}
+
+.back-button:hover {
+    transform: translateX(-1px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.settings-item {
+    transition: all 0.2s ease-out;
+}
+
+.settings-item:hover {
+    background: transparent;
+    transform: translateX(0);
+}
+
+.auth-input {
+    transition: all 0.2s ease-out;
+}
+
+.auth-input:focus {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.vpn-timer {
+    transition: all 0.2s ease-out;
+}
+
+.vpn-timer.connected {
+    animation: none;
+}
+
+@keyframes timerPulse { /* Keep keyframes but don't apply */
+    0% { text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
+    50% { text-shadow: 0 4px 20px rgba(255, 255, 255, 0.2); }
+    100% { text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
+}
+
+/* ========================= */
+/* 🌟 SCREEN TRANSITIONS */
+/* ========================= */
+/* New styles for server list screen */
+#server-list-screen {
+    justify-content: flex-start; /* Align content to the top */
+    padding-top: 10px;
+}
+
+.search-bar-container {
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+#server-search-input {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background-color: var(--secondary-color);
+    color: var(--text-light);
+    font-size: 16px;
+    outline: none;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#server-search-input::placeholder {
+    color: var(--text-muted);
+}
+
+#server-search-input:focus {
+    border-color: var(--accent-color);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(123, 97, 255, 0.2);
+}
+
+.server-list-container {
+    width: 100%;
+    flex-grow: 1; /* Allows it to take available height */
+    overflow-y: auto; /* Enable scrolling for long lists */
+    padding: 0 20px 20px;
+    box-sizing: border-box;
+}
+
+.server-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    background-color: var(--secondary-color);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 4px 12px var(--shadow-dark);
+    position: relative; /* For the pseudo-element glow */
+}
+
+.server-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px var(--shadow-dark);
+    background-color: #4a5075; /* Slightly lighter on hover */
+}
+
+.server-item .server-flag {
+    width: 28px;
+    height: 28px;
+    margin-right: 12px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.server-item .server-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-light);
+    flex-grow: 1; /* Take up available space */
+}
+
+/* Adjust existing server-selection-pill */
+#server-selection-pill {
+    margin-bottom: 40px; /* Space above stats row */
+    height: auto; /* Adjust height dynamically */
+    padding: 12px 20px; /* Adjust padding */
+}
+
+#server-selection-pill .server-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#server-selection-pill .server-name {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+/* Ensure the arrow icon on the pill remains consistent */
+#server-selection-pill .arrow-icon {
+    margin-left: auto; /* Push to the right */
+}
+
+/* Styling for the new back button on server list screen */
+#back-to-vpn-from-servers {
+    margin-right: auto; /* Push to the left in the top bar */
+}
+
+#server-list-screen .vpn-title {
+    font-size: 26px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #7b61ff 0%, #563fcb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    margin: 18px 0 18px 0;
+    letter-spacing: 1px;
+    text-align: center;
+    display: block;
+}

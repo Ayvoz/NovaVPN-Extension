@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "Your Extension Name",
+  "version": "1.0.0",
+  "description": "Description of your extension",
+  
+  "background": {
+    "service_worker": "js/background.js"
+  },
+  
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["js/content.js"]
+    }
+  ],
+  
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Your Extension"
+  },
+  
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' https://www.googleapis.com https://securetoken.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://identitytoolkit.googleapis.com;"
+  },
+  
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/*",
+        "css/*"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
